@@ -3,7 +3,7 @@
 pipeline {
     agent any
     environment {
-        DOCKER_IMAGE = 'ankushnagpal10/kube-petclinic-app:latest'
+        DOCKER_IMAGE = 'ankushnagpal10/kube-petclinic-app'
         CLUSTER_NAME = 'my-kind-cluster'
         COMMIT_ID = "${env.GIT_COMMIT?.take(7)}"
 

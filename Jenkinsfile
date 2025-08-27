@@ -2,7 +2,9 @@
 
 pipeline {
     agent any
-
+    environment {
+        DOCKER_IMAGE = 'ankushnagpal10/kube-petclinic-app:latest'
+    }
     stages {
         stage ('Git Checkout') {
             steps{
@@ -20,8 +22,8 @@ pipeline {
             steps {
                 script {
                     withDockerRegistry(credentialsId: 'docker_cred') {
-                        sh 'docker build -t ankushnagpal10/kube-petclinic-app:3.0.0 .'
-                        sh 'docker push ankushnagpal10/kube-petclinic-app:3.0.0'
+                        sh 'docker build -t ${DOCKER_IMAGE} .'
+                        sh 'docker push ${DOCKER_IMAGE}'
                     }
                 }
             }

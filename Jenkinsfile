@@ -48,9 +48,9 @@ pipeline {
                 script {
                     echo 'Deploying to KIND Cluster...'
                     sh '''
-                        kubectl create ns pet-clinic-app
-                        kubectl create ns pet-clinic-db
-                        kubectl apply -f secret.yml
+                        kubectl create ns pet-clinic-app || true
+                        kubectl create ns pet-clinic-db || true
+                        kubectl apply -f secret.yml 
                         '''
                     dir('mysql/') {
                         sh '''

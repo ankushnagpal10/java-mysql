@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: java-app-container
-        image: ankushnagpal10/kube-petclinic-app:3.0.0
+        image: ankushnagpal10/kube-petclinic-app:__GIT_COMMIT_ID__
         env:
             - name: DB_USERNAME
               valueFrom:

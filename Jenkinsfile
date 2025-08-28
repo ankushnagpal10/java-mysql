@@ -59,14 +59,19 @@ pipeline {
                         ''' 
                         }
                     dir('java-app') {
-                        sh 'kubectl apply -f configmap.yml'
-                        sh 'kubectl apply -f java.yml'
-                        sh 'kubectl apply -f https://raw.githubusercontent.com/techiescamp/kubeadm-scripts/main/manifests/metrics-server.yaml'
-                        sh 'kubectl apply -f hpa.yml'
-                        sh 'kubectl port-forward service/java-app-service 9090:9090 -n pet-clinic-app > /dev/null 2>&1 &'
-                        }
+                        sh '''
+                        sed -i "s|__GIT_COMMIT_ID__|$COMMIT_ID|g" java.yaml
+                        kubectl apply -f configmap.yml
+                        kubectl apply -f java.yml
+                        kubectl apply -f https://raw.githubusercontent.com/techiescamp/kubeadm-scripts/main/manifests/metrics-server.yaml
+                        kubectl apply -f hpa.yml
+                        kubectl port-forward service/java-app-service 9090:9090 -n pet-clinic-app &
+                        '''
                     }
                 }
             }
         }
     }
+
+}
+    

@@ -65,7 +65,7 @@ pipeline {
                         kubectl apply -f java.yml
                         kubectl apply -f https://raw.githubusercontent.com/techiescamp/kubeadm-scripts/main/manifests/metrics-server.yaml
                         kubectl apply -f hpa.yml
-			kubectl wait --for=condition=ready pod -l app=java-app --timeout=90s -n pet-clinic-app
+			            kubectl wait --for=condition=ready pod -l app=java-app --timeout=90s -n pet-clinic-app
                         kubectl port-forward service/java-app-service 9090:9090 -n pet-clinic-app &
                         '''
                     }
